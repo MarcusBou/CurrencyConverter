@@ -21,7 +21,7 @@ public class ApiCurrency {
     private String basicURL;
     private String key;
     private RequestQueue queue;
-    private List<String> currencyBases = new ArrayList<String>();
+    private List<BaseCurrency> currencyBases = new ArrayList<BaseCurrency>();
     private List<CurrencyListener> listeners = new ArrayList<CurrencyListener>();
 
 
@@ -34,8 +34,8 @@ public class ApiCurrency {
     /**Add Request to a simple queue*/
     public void addToQueue(String[] endPoint){
         String url = createURL(endPoint);
-        JsonObjectRequest stringRequest = createJsonRequest(url);
-        queue.add(stringRequest);
+        JsonObjectRequest JsonRequest = createJsonRequest(url);
+        queue.add(JsonRequest);
     }
 
     /**Creates A string Request with anonymous function*/
@@ -45,13 +45,12 @@ public class ApiCurrency {
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    currencyBases = new ArrayList<String>();
+                    currencyBases = new ArrayList<BaseCurrency>();
                     JSONObject resp = response.getJSONObject("conversion_rates");
                     Iterator<String> keys = resp.keys();
                     while (keys.hasNext()){
-
                         String key = keys.next();
-                        currencyBases.add(key);
+                        currencyBases.add(new BaseCurrency(key, Double.parseDouble(resp.get(key).toString())));
                     }
                     notifyAllObserversOnBaseChange();
                 }catch (Exception e){
