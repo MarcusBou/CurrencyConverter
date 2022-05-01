@@ -6,7 +6,7 @@ public class BaseCurrency {
     private String letterCode;
     private double value;
 
-    public BaseCurrency(String code, Double value){
+    public BaseCurrency(String code, double value){
         this.letterCode = code;
         this.value = value;
     }
@@ -17,8 +17,9 @@ public class BaseCurrency {
     /**Will take current value and times it with
      * @param amount*/
     public void SetValueAfterAmount(double amount){
-        Log.i("errror", "Virker det?");
-        this.value = ((double)this.value * amount);
+        Log.i("ValueCheck", String.valueOf(this.value));
+        this.value = this.value * amount;
+        Log.i("ValueCheck", String.valueOf(this.value));
     }
     @Override
     public String toString(){

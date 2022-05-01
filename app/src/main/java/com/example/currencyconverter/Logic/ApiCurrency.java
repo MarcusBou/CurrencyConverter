@@ -16,7 +16,7 @@ import java.util.Iterator;
 import java.util.List;
 
 
-public class ApiCurrency {
+public class ApiCurrency implements ApiCall {
 
     private String basicURL;
     private String key;
@@ -31,10 +31,6 @@ public class ApiCurrency {
         this.key = key;
     }
 
-    public List<CurrencyListener> getListeners() {
-        return listeners;
-    }
-
     /**Add Request to a simple queue*/
     public void addToQueue(String[] endPoint){
         String url = createURL(endPoint);
@@ -44,7 +40,7 @@ public class ApiCurrency {
 
     /**Creates A string Request with anonymous function*/
     private JsonObjectRequest createJsonRequest(String url){
-
+        Log.i("FUCK", url);
         return new JsonObjectRequest(url, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -59,6 +55,7 @@ public class ApiCurrency {
                     notifyAllObserversOnBaseChange();
                 }catch (Exception e){
                     Log.i("Error", e.getMessage());
+                    Log.i("Error", "e.getMessage()");
                 }
             }
         }, new Response.ErrorListener() {
@@ -74,7 +71,7 @@ public class ApiCurrency {
         for(String string : endpoint){
             tempURL += string +"/";
         }
-        return  tempURL;
+        return tempURL;
     }
 
     private void notifyAllObserversOnBaseChange(){
