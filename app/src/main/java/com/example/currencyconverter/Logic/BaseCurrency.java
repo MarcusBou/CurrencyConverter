@@ -4,7 +4,7 @@ import android.util.Log;
 
 public class BaseCurrency {
     private String letterCode;
-    private Double value;
+    private double value;
 
     public BaseCurrency(String code, Double value){
         this.letterCode = code;
@@ -22,6 +22,6 @@ public class BaseCurrency {
     }
     @Override
     public String toString(){
-        return String.format(this.letterCode + ":" + this.value);
+        return String.format(this.letterCode + ":" + String.valueOf(this.value));
     }
 }

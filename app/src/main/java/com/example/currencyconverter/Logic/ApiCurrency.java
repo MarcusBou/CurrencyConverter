@@ -31,6 +31,10 @@ public class ApiCurrency {
         this.key = key;
     }
 
+    public List<CurrencyListener> getListeners() {
+        return listeners;
+    }
+
     /**Add Request to a simple queue*/
     public void addToQueue(String[] endPoint){
         String url = createURL(endPoint);
