@@ -66,6 +66,7 @@ public class ApiCurrency implements ApiCall {
         });
     }
 
+    /**For setting the url together*/
     private String createURL(String[] endpoint){
         String tempURL = this.basicURL + this.key;
         for(String string : endpoint){
@@ -74,6 +75,7 @@ public class ApiCurrency implements ApiCall {
         return tempURL;
     }
 
+    /**Notifies all listeners*/
     private void notifyAllObserversOnBaseChange(){
         for(CurrencyListener l : listeners) {
             l.onBaseChange(this.currencyBases);
